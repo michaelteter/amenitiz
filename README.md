@@ -35,6 +35,17 @@ Tests are built for the Minitest Ruby test framework.
 
 To run the tests, $`./minitest.sh`
 
+## Products
+
+Products are defined in the file `./assets/products.csv`, which is a simple
+comma separated data file (CSV).  An example exists which is based on the original
+challenge definition.
+
+The rules can be modified in the CSV file, and the file
+can be reloaded in the app via the app menu.
+
+Additional details can be found in the PRODUCTS.md file.
+
 ## Discount Rules
 
 Discount rules are defined in the file `./assets/discounts.csv`, which is a simple
@@ -43,4 +54,15 @@ challenge definition.
 
 The rules can be modified in the CSV file, and the file
 can be reloaded in the app via the app menu.  
+
+Additional details can be found in the DISCOUNTS.md file.
+
+## Caveats
+
+As this is a simple demonstration system, all prices are assumed to
+be in the same currency; no currency indicator is necessary.
+
+Were this system expanded to handle multiple currencies, many steps
+would need to be taken to allow for currency conversions and representations.
+These concerns are beyond the scope of this challenge.
 
