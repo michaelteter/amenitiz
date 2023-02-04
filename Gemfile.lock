@@ -2,12 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     minitest (5.17.0)
+    table_print (1.5.7)
 
 PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
   minitest
+  table_print
 
 BUNDLED WITH
    2.4.5

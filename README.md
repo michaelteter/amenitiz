@@ -59,6 +59,8 @@ Additional details can be found in the DISCOUNTS.md file.
 
 ## Caveats
 
+### Currency
+
 As this is a simple demonstration system, all prices are assumed to
 be in the same currency; no currency indicator is necessary.
 
@@ -66,3 +68,15 @@ Were this system expanded to handle multiple currencies, many steps
 would need to be taken to allow for currency conversions and representations.
 These concerns are beyond the scope of this challenge.
 
+### Floats for Prices
+
+Prices are stored as floats, but in the real world we might use an integer
+where the price would be stored with the whole and decimal parts, and the
+currency/region definitions would indicate how many decimal places were being
+stored.
+
+### Error Handling
+
+In many cases, error handling is not done.  The safe reference operator (`&`)
+is used in places to illustrate where nil risks are likely; these would suggest
+where additional error handling should be added.
