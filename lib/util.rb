@@ -11,4 +11,8 @@ module Util
 
     s
   end
+
+  def hash_without_key(hash, key)
+    hash.reject { |k, _| k == key }
+  end
 end

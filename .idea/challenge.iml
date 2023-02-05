@@ -12,7 +12,10 @@
     <orderEntry type="jdk" jdkName="asdf: 3.2.0" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.4.5, asdf: 3.2.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="docile (v1.4.0, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.17.0, asdf: 3.2.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="table_print (v1.5.7, asdf: 3.2.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov (v0.21.2, asdf: 3.2.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov-html (v0.12.3, asdf: 3.2.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov_json_formatter (v0.1.4, asdf: 3.2.0) [gem]" level="application" />
   </component>
 </module>

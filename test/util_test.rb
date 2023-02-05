@@ -18,4 +18,15 @@ class TestUtil < Minitest::Test
                                                         delim:    '<>'),
                  'Foo 1 2')
   end
+
+  def test_hash_without_key
+    orig_h = { a: 1, b: 2 }
+    new_h = Util.hash_without_key(orig_h, :b)
+    refute_equal orig_h, new_h
+    refute_nil orig_h[:b]
+    assert_nil new_h[:b]
+
+    empty_h = Util.hash_without_key({}, :foo)
+    assert_empty empty_h
+  end
 end
