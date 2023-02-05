@@ -1,4 +1,5 @@
 require 'csv'
+require_relative './product'
 
 module CatalogService
   extend self

@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative "../lib/catalog_service.rb"
+require_relative "../lib/catalog_service"
 
 class TestCatalogService < Minitest::Test
   SAMPLE_SKU = 'GR1'

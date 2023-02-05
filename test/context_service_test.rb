@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative "../lib/context_service.rb"
+require_relative "../lib/context_service"
 
 class TestContextService < Minitest::Test
   def test_get_context

@@ -1,3 +1,4 @@
+require_relative './catalog_service'
 require_relative './util'
 
 module CartService
@@ -18,4 +19,31 @@ module CartService
       Cart.new(items: Util.hash_without_key(cart.items, sku))
     end
   end
+
+  def cart_total(cart)
+    total = 0
+    catalog = CatalogService.load_products
+    cart.items.each do |sku, qty|
+      total += catalog[sku].price * qty
+    end
+
+    total
+  end
+
+  def cart_line_total(product, qty)
+    product.price * qty
+  end
+
+  def cart_line_to_s(product, qty)
+    "#{product.sku}: #{product.name} | #{qty} X #{Util.formatted_currency(product.price)} = " +
+      Util.euro_formatted_currency(cart_line_total(product, qty))
+  end
+
+  def cart_to_s(cart)
+    catalog = CatalogService.load_products
+    cart.items.map do |sku, qty|
+      cart_line_to_s(catalog[sku], qty)
+    end.join("\n")
+  end
 end
+

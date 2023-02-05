@@ -1,4 +1,4 @@
-require_relative './util.rb'
+require_relative './util'
 
 class Discount
   attr_reader :code, :description, :product_sku, :rule_name, :rule_params

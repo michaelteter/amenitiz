@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative "../lib/discount.rb"
+require_relative "../lib/discount"
 
 class TestDiscount < Minitest::Test
   def setup

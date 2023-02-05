@@ -1,5 +1,5 @@
 require 'yaml'
-require_relative './discount.rb'
+require_relative './discount'
 
 module DiscountService
   extend self

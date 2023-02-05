@@ -15,4 +15,12 @@ module Util
   def hash_without_key(hash, key)
     hash.reject { |k, _| k == key }
   end
+
+  def formatted_currency(amount, symbol='')
+    "#{'%.2f' % amount} #{symbol}".rstrip
+  end
+
+  def euro_formatted_currency(amount)
+    formatted_currency(amount, '€')
+  end
 end

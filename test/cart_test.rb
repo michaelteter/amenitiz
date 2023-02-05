@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative "../lib/cart.rb"
+require_relative "../lib/cart"
 
 class TestCart < Minitest::Test
   def test_new_empty_cart

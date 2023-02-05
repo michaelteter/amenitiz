@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative "../lib/util.rb"
+require_relative "../lib/util"
 
 class TestUtil < Minitest::Test
   def test_substitute_string_template_values
@@ -28,5 +28,11 @@ class TestUtil < Minitest::Test
 
     empty_h = Util.hash_without_key({}, :foo)
     assert_empty empty_h
+  end
+
+  def test_formatted_currency
+    amount = 1
+    assert_equal '1.00', Util.formatted_currency(amount)
+    assert_equal '1.00 €', Util.euro_formatted_currency(amount)
   end
 end

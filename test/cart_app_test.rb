@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative "../cart_app.rb"
+require_relative "../cart_app"
 
 class TestCartApp < Minitest::Test
   def test_launch_app

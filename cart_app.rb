@@ -26,7 +26,8 @@ module CartApp
     cart = CartService.remove_item(cart: cart, sku: catalog.keys[0], qty: 2)
     cart = CartService.add_item(cart: cart, sku: catalog.keys[1], qty: 1)
     cart = CartService.add_item(cart: cart, sku: catalog.keys[1], qty: 1)
-    puts cart
+    puts CartService.cart_to_s(cart)
+    puts "Total: #{Util.euro_formatted_currency(CartService.cart_total(cart))}"
 
     0
   end
