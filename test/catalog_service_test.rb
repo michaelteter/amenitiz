@@ -26,11 +26,5 @@ class TestCatalogService < Minitest::Test
       assert product.price.is_a?(Float)
     end
   end
-
-  def test_catalog_as_table
-    rows = CatalogService.to_a(@catalog)
-    assert_equal ['sku', 'name', 'price'], rows.first.map!(&:downcase)
-    assert rows.length > 1
-  end
 end
 

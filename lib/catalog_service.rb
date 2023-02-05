@@ -32,9 +32,4 @@ module CatalogService
 
     catalog
   end
-
-  def to_a(catalog)
-    [['SKU', 'Name', 'Price']] +
-      catalog.map { |_sku, product| [product.sku, product.name, product.price] }
-  end
 end

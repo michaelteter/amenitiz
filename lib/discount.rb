@@ -12,4 +12,8 @@ class Discount
                                            data:     self.rule_params)
 
   end
+
+  def to_s
+    "#{self.code}: #{realized_description}"
+  end
 end

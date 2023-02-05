@@ -1,5 +1,6 @@
 require_relative 'lib/product'
 require_relative 'lib/catalog_service'
+require_relative 'lib/discount_service'
 
 module CartApp
   extend self
@@ -7,7 +8,14 @@ module CartApp
   def launch_app
     catalog = CatalogService.load_products
     puts 'Catalog'
-    pp CatalogService.to_a(catalog)
+    catalog.each { |_sku, product| puts product }
+
+    puts
+
+    discounts = DiscountService.load_discounts
+    puts 'Discounts'
+    discounts.each { |_code, discount| puts discount }
+
     0
   end
 end
