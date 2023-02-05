@@ -1,0 +1,23 @@
+- code:        GR1-N-for-M
+  description: buy {{buy_count}} get {{free_count}} free for green tea
+  product_sku: GR1
+  rule_name:   BUY_N_GET_M_FREE
+  rule_params:
+    buy_count:  1
+    free_count: 1
+
+- code:        SR1-MIN-3-all-new-price
+  description: buy {{min_qty}} strawberries, all at new price {{price}}
+  product_sku: SR1
+  rule_name:   MINIMUM_QTY_ALL_AT_NEW_PRICE
+  rule_params:
+    min_qty: 3
+    price:   4.50
+
+- code:        CF1-MIN-3-all-pct-price
+  description: buy {{min_qty}} coffee, get all for {{price_ratio}} original price
+  product_sku: CF1
+  rule_name:   MINIMUM_QTY_ALL_DISCOUNTED
+  rule_params:
+    min_qty:     3
+    price_ratio: 2/3
