@@ -9,7 +9,7 @@ class TestDiscountService < Minitest::Test
     @discounts = DiscountService.load_discounts
     @sample_cart = Cart.new('GR1' => 2, 'SR1' => 5, 'CF1' => 10)
 
-    @product = Product.new(sku: 'FOO', name: 'Foo d', price: 1)
+    @product = Product.new(sku: 'FOO', name: 'Foo d', price: 3.11)
     @discount = Discount.new(code:        'FOO-N-for-M',
                              product_sku: 'FOO',
                              description: 'Buy {{buy_count}}, and get {{free_count}} more free!',
@@ -22,6 +22,25 @@ class TestDiscountService < Minitest::Test
     @discounts.each do |_code, discount|
       assert discount.code.is_a?(String)
     end
+  end
+
+  def test_apply_minimum_qty_all_at_new_price
+    discount = Discount.new(code:        'FOO_MINIMUM_QTY_ALL_AT_NEW_PRICE',
+                            product_sku: 'FOO',
+                            description: 'Buy {{min_qty}}, and get all of this item for the new low price of {{price}}',
+                            rule_name:   'MINIMUM_QTY_ALL_AT_NEW_PRICE',
+                            rule_params: { 'min_qty' => 5, 'price' => 2.50 })
+    total = DiscountService.apply_minimum_qty_all_at_new_price(discount: discount, product: @product, qty: 0)
+    assert_equal total, 0
+
+    total = DiscountService.apply_minimum_qty_all_at_new_price(discount: discount, product: @product, qty: 1)
+    assert_equal total, @product.price
+
+    total = DiscountService.apply_minimum_qty_all_at_new_price(discount: discount, product: @product, qty: 5)
+    assert_equal total, 5 * discount.rule_params['price']
+
+    total = DiscountService.apply_minimum_qty_all_at_new_price(discount: discount, product: @product, qty: 6)
+    assert_equal total, 6 * discount.rule_params['price']
   end
 
   def test_apply_buy_n_get_m_free
