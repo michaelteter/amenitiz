@@ -8,7 +8,7 @@ class TestCart < Minitest::Test
   end
 
   def test_new_filled_cart
-    cart = Cart.new(items: { 'GR1' => 1 })
+    cart = Cart.new('GR1' => 1)
     assert_equal cart.items, { 'GR1' => 1 }
   end
 end
