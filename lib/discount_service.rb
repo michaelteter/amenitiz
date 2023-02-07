@@ -30,6 +30,16 @@ module DiscountService
     discounts
   end
 
+  def apply_minimum_qty_all_discounted(discount:, product:, qty:)
+    price = if qty >= discount.rule_params['min_qty']
+      Util.multiply_by_fraction(product.price, discount.rule_params['price_ratio'])
+    else
+      product.price
+    end
+
+    qty * price
+  end
+
   def apply_minimum_qty_all_at_new_price(discount:, product:, qty:)
     price = if qty >= discount.rule_params['min_qty']
       discount.rule_params['price']

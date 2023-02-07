@@ -24,6 +24,28 @@ class TestDiscountService < Minitest::Test
     end
   end
 
+  def test_apply_minimum_qty_all_discounted
+    discount = Discount.new(code:        'FOO_MINIMUM_QTY_ALL_DISCOUNTED',
+                            product_sku: 'FOO',
+                            description: 'Buy {{min_qty}}, and get all of this item for {{price_ratio}} of the normal price',
+                            rule_name:   'MINIMUM_QTY_ALL_DISCOUNTED',
+                            rule_params: { 'min_qty' => 3, 'price_ratio' => '1/2' })
+    total = DiscountService.apply_minimum_qty_all_discounted(discount: discount, product: @product, qty: 0)
+    assert_equal total, 0
+
+    total = DiscountService.apply_minimum_qty_all_discounted(discount: discount, product: @product, qty: 1)
+    assert_equal total, @product.price * 1
+
+    total = DiscountService.apply_minimum_qty_all_discounted(discount: discount, product: @product, qty: 2)
+    assert_equal total, @product.price * 2
+
+    total = DiscountService.apply_minimum_qty_all_discounted(discount: discount, product: @product, qty: 3)
+    assert_equal total, @product.price * 3 / 2
+
+    total = DiscountService.apply_minimum_qty_all_discounted(discount: discount, product: @product, qty: 4)
+    assert_equal total, @product.price * 4 / 2
+  end
+
   def test_apply_minimum_qty_all_at_new_price
     discount = Discount.new(code:        'FOO_MINIMUM_QTY_ALL_AT_NEW_PRICE',
                             product_sku: 'FOO',

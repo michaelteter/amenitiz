@@ -23,4 +23,17 @@ module Util
   def euro_formatted_currency(amount)
     formatted_currency(amount, '€')
   end
+
+  def fraction_components(fraction)
+    unless /^\d+\/\d+$/.match?(fraction)
+      raise ArgumentError, "expected fraction; got '#{fraction}'"
+    end
+
+    fraction.split('/').map(&:to_i)
+  end
+
+  def multiply_by_fraction(n, fraction)
+    numerator, denominator = fraction_components(fraction)
+    Float(n) * numerator / denominator
+  end
 end

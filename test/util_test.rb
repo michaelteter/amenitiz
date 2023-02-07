@@ -35,4 +35,20 @@ class TestUtil < Minitest::Test
     assert_equal '1.00', Util.formatted_currency(amount)
     assert_equal '1.00 €', Util.euro_formatted_currency(amount)
   end
+
+  def test_fraction_components
+    assert_equal Util.fraction_components('1/2'), [1, 2]
+
+    assert_raises(ArgumentError) { Util.fraction_components('') }
+    assert_raises(ArgumentError) { Util.fraction_components('/') }
+    assert_raises(ArgumentError) { Util.fraction_components('1/') }
+    assert_raises(ArgumentError) { Util.fraction_components('/2') }
+    assert_raises(ArgumentError) { Util.fraction_components('1/x') }
+  end
+
+  def test_multiply_fraction
+    assert_equal Util.multiply_by_fraction(2, '1/2'), 1
+    assert_equal Util.multiply_by_fraction(2, '1/3'), 2.0 / 3
+    assert_equal Util.multiply_by_fraction(11.23, '2/3'), 11.23 * 2 / 3
+  end
 end
