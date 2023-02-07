@@ -24,7 +24,8 @@ module DiscountService
     discounts = {}
     data.each do |discount_data|
       d = build_discount_from_data(discount_data)
-      discounts[d.code] = d
+      # NOTE: We assume a maximum of one discount definition per product
+      discounts[d.product_sku] = d
     end
 
     discounts
@@ -76,7 +77,7 @@ module DiscountService
   end
 
   def discounted_line_total(product:, qty:, discounts: nil)
-    discount = (discounts || load_discounts[product.sku])&.values&.first
+    discount = discounts || load_discounts[product.sku]
     return if discount.nil? # Let the caller calculate the normal total
 
     apply_rule(discount: discount, product: product, qty: qty)

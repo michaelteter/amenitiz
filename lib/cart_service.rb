@@ -1,4 +1,5 @@
 require_relative './catalog_service'
+require_relative './discount_service'
 require_relative './util'
 
 module CartService
@@ -24,7 +25,9 @@ module CartService
     total = 0
     catalog = CatalogService.load_products
     cart.items.each do |sku, qty|
-      total += catalog[sku].price * qty
+      discounted_line_total = DiscountService.discounted_line_total(product: catalog[sku], qty: qty, discounts: nil)
+      standard_line_total = catalog[sku].price * qty
+      total += discounted_line_total || standard_line_total
     end
 
     total
