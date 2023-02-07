@@ -80,19 +80,6 @@ class CartApp
     0 # POSIX-happy return value
   end
 
-  def menu_to_s = MENU.map.with_index(1) { |item, i| "#{i}. #{item[1]}" }.join("\n")
-
-  def show_menu = puts "Commands\n#{menu_to_s}"
-
-  def show_cart
-    puts 'Your shopping cart'
-    puts DisplayService.cart_to_s(@cart)
-    show_cart_total
-    puts ' (Note: total includes any applied discounts)'
-  end
-
-  def show_cart_total = puts "> Total: #{Util.euro_formatted_currency(CartService.cart_total(@cart))} <"
-
   def get_product_sku_input
     skus = @catalog.keys
     print "Please enter a product code from #{skus.join(', ')}: "
@@ -104,6 +91,21 @@ class CartApp
       nil
     end
   end
+
+
+  def show_menu
+    puts '::: Commands :::'
+    puts MENU.map.with_index(1) { |item, i| "#{i}. #{item[1]}" }.join("\n")
+  end
+
+  def show_cart
+    puts 'Your shopping cart'
+    puts DisplayService.cart_to_s(@cart)
+    show_cart_total
+    puts ' (Note: total includes any applied discounts)'
+  end
+
+  def show_cart_total = puts "> Total: #{Util.euro_formatted_currency(CartService.cart_total(@cart))} <"
 end
 
 # =======================================================================

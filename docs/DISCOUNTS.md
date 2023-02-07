@@ -31,7 +31,7 @@ MINIMUM_QTY_ALL_AT_NEW_PRICE requires two parameters:
 
 MINIMUM_QTY_ALL_DISCOUNTED requires two parameters:
 1. minimum quantity required to activate the discount
-2. discount percentage which is applied to all quantity of corresponding item
+2. discount percentage (ratio expressed as a fraction) which is applied to all quantity of corresponding item
 
 ## Rule Params
 

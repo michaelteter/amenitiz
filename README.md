@@ -1,6 +1,7 @@
 # Amenitiz Technical Challenge
 
-This project is a solution to the Amenitiz shopping cart calculation challenge.
+This document describes the goal of the project and high level information.  
+Additional and more specific information can be found in the `docs/*.md` files.
 
 ## Primary Goal
 
@@ -17,23 +18,53 @@ is calculated.
 
 This solution demonstrates a service-based architectural approach where
 business logic is decoupled from implementation as much as is reasonably
-possible without defining too many abstractions.
+possible without creating too many abstractions.
 
 Domain models are thin, representing only the data they model.  Operations
 on those models are isolated in service modules, where the term "service"
 is used in the generic sense rather than as network process.
 
+### Reliability
+
+Some functional programming practices are used, such as pure functions and
+immutability.  This works well in practice for most Ruby code in general
+(beyond this demo), but copy-on-modify can have a significant negative impact
+on performance in tight loops and/or when the volume of data being processed
+is very large.  With this problem (shopping cart), there is no case where
+memory copying would be noticeable, so the concern can be comfortably put 
+out of one's mind :).
+
+### Maintainability and Extensibility
+
+This demo implementation attempts to find a good balance of separation of 
+concerns and architectural complexity.  An unfamiliar developer should find
+it fairly clear how to fix any problems, modify behaviors, or add additional
+features.
+
+In particular, the discount rule system provides a pattern that can be followed
+to create new types of discounts with relative ease, with two significant
+exceptions:
+- each product may have only one discount rule which can apply to it
+- discounts involving multiple products are not possible without significant changes (probably a complete rearchitecting of the discount system)
+
 ## App Usage
 
 Launch the command line app with $`ruby cart_app.rb`
 
-The app will provide a menu of commands which provide the functionality described above.
+The app will provide a menu of commands which provide the functionality described in the `docs/AMENITIZ_CHALLENGE.md` document.
 
 ## Tests
 
-Tests are built for the Minitest Ruby test framework.
+Tests are built for the Minitest Ruby test framework.  Minitest was chosen as it is
+lightweight and direct in use (compared to Rspec).
 
 To run the tests, $`./minitest.sh`
+
+Most code is covered by tests.  Two files are completely not covered (cart_app.rb
+and display_service.rb) as they are just related to demonstration of the system
+and its logic.  All other code representing system and logic are covered save for
+a few error cases (which themselves pertain more to the demo rather than the
+system logic).
 
 ## Products
 
@@ -44,25 +75,19 @@ challenge definition.
 The rules can be modified in the CSV file, and the file
 can be reloaded in the app via the app menu.
 
-Additional details can be found in the PRODUCTS.md file.
+Additional details can be found in the `docs/PRODUCTS.md` file.
 
 ## Discount Rules
 
-Discount rules are defined in the file `./assets/discounts.csv`, which is a simple
-comma separated data file (CSV).  An example exists which is based on the original
-challenge definition.  
-
-The rules can be modified in the CSV file, and the file
-can be reloaded in the app via the app menu.  
-
-Additional details can be found in the DISCOUNTS.md file.
+Discount rules are defined in the file `./assets/discounts.yaml`, which is 
+described in the `docs/DISCOUNTS.md` file
 
 ## Caveats
 
 ### Currency
 
 As this is a simple demonstration system, all prices are assumed to
-be in the same currency; no currency indicator is necessary.
+be in the same currency (Euros).
 
 Were this system expanded to handle multiple currencies, many steps
 would need to be taken to allow for currency conversions and representations.
@@ -70,13 +95,14 @@ These concerns are beyond the scope of this challenge.
 
 ### Floats for Prices
 
-Prices are stored as floats, but in the real world we might use an integer
-where the price would be stored with the whole and decimal parts, and the
-currency/region definitions would indicate how many decimal places were being
-stored.
+Prices are stored as floats, but in the real world we might use a Currency
+class or an integer and corresponding decimal place value.  Further, this
+would be included in a localization system, as different currencies can use
+different numbers of digits beyond the decimal.
 
 ### Error Handling
 
-In many cases, error handling is not done.  The safe reference operator (`&`)
-is used in places to illustrate where nil risks are likely; these would suggest
-where additional error handling should be added.
+Error handling is implemented in places where it provides value or is 
+beneficial to demonstrating the logic of this system.  However, this demo
+is not intended to be bulletproof.
+
