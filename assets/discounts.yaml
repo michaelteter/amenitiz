@@ -7,7 +7,7 @@
     free_count: 1
 
 - code:        SR1-MIN-3-all-new-price
-  description: buy {{min_qty}} strawberries, all at new price {{price}}
+  description: buy at least {{min_qty}} strawberries, get all strawberries at the new price of {{price}}
   product_sku: SR1
   rule_name:   MINIMUM_QTY_ALL_AT_NEW_PRICE
   rule_params:
@@ -15,7 +15,7 @@
     price:   4.50
 
 - code:        CF1-MIN-3-all-pct-price
-  description: buy {{min_qty}} coffee, get all for {{price_ratio}} original price
+  description: buy at least {{min_qty}} coffee, get all coffee for {{price_ratio}} of the original price
   product_sku: CF1
   rule_name:   MINIMUM_QTY_ALL_DISCOUNTED
   rule_params:

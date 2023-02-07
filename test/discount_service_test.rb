@@ -103,7 +103,7 @@ class TestDiscountService < Minitest::Test
   end
 
   def test_discounted_line_total
-    discounts = { @discount.code => @discount }
+    discounts = { @discount.product_sku => @discount }
 
     total = DiscountService.discounted_line_total(product: @product, qty: 16, discounts: discounts)
     assert_equal total, 12 * @product.price

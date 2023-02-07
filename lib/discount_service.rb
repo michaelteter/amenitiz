@@ -62,7 +62,7 @@ module DiscountService
     else
       full_discount_sets = (qty / (n+m))
       full_discount_qty = full_discount_sets * (n+m)
-      remaining_qty = (qty - full_discount_qty) % n
+      remaining_qty = (qty - full_discount_qty)
       full_discount_sets * n + remaining_qty
     end
 
@@ -77,7 +77,7 @@ module DiscountService
   end
 
   def discounted_line_total(product:, qty:, discounts: nil)
-    discount = discounts || load_discounts[product.sku]
+    discount = (discounts || load_discounts)[product.sku]
     return if discount.nil? # Let the caller calculate the normal total
 
     apply_rule(discount: discount, product: product, qty: qty)

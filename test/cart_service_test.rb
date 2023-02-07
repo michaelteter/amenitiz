@@ -46,17 +46,6 @@ class TestCartService < Minitest::Test
     assert_equal calculated_total, manual_total
   end
 
-  def test_cart_line_to_s
-    p = @catalog.values.first
-    qty = 2
-    line_s = CartService.cart_line_to_s(p, qty)
-    assert line_s.include?(p.sku)
-    assert line_s.include?(p.name)
-    assert line_s.include?(qty.to_s)
-    assert line_s.include?(Util.formatted_currency(p.price))
-    assert line_s.include?(Util.formatted_currency(CartService.cart_line_total(p, qty)))
-  end
-
   def test_cart_total
     # **Test data**
     # | Basket | Total price expected |

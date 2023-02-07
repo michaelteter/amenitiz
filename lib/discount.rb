@@ -13,7 +13,4 @@ class Discount
 
   end
 
-  def to_s
-    "#{self.code}: #{realized_description}"
-  end
 end
